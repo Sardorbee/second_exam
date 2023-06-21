@@ -29,7 +29,7 @@ class SeecondSccrenn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double avatarRadius = screenHeight * 0.1;
+    double avatarRadius = screenHeight * 0.07;
     return Padding(
       padding: EdgeInsets.all(screenHeight * 0.02),
       child: Column(
@@ -54,7 +54,8 @@ class SeecondSccrenn extends StatelessWidget {
               child: Column(
                 children: [
                   CircleAvatar(
-                    // child: Image.asset("assets/images/bootm/123.png"),
+                    child: Image.asset(
+                        fit: BoxFit.cover, "assets/images/bootm/123.png"),
                     radius: avatarRadius,
                   ),
                   SizedBox(height: screenHeight * 0.01),

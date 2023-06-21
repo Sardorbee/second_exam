@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_exam/resources/Color/custom_colors.dart';
+import 'package:second_exam/resources/Color/custom_text.dart';
 import 'package:second_exam/second_screen/second_screen.dart';
 
 import 'first_screen/top_section/top_section.dart';
@@ -39,9 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const FirstMain(),
-    const SeecondSccrenn(name: "Hasan",surname: "basheer",),
-   
-    
+    const SeecondSccrenn(
+      name: "Hasan",
+      surname: "basheer",
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -56,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: MyColor.primaryBckg,
       body: Column(
         children: [
-          
           _widgetOptions.elementAt(_selectedIndex),
           CustomBottomNavigationBar(
             selectedIndex: _selectedIndex,
@@ -68,17 +69,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// ignore: must_be_immutable
 class CustomBottomNavigationBar extends StatelessWidget {
-  final int selectedIndex;
+  int selectedIndex;
   final ValueChanged<int> onItemTapped;
 
-  const CustomBottomNavigationBar({super.key, 
+  CustomBottomNavigationBar({
+    super.key,
     required this.selectedIndex,
     required this.onItemTapped,
   });
 
   @override
   Widget build(BuildContext context) {
+    bool isVisible = false;
+    bool isVisible1 = false;
+    if (selectedIndex == 0) {
+      isVisible = true;
+    }
+    if (selectedIndex == 1) {
+      isVisible1 = true;
+    }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 60,
@@ -89,36 +100,37 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildNavItem('Home', Icons.home, 0),
-          buildNavItem('Profile', Icons.person, 1),
-         
+          Row(
+            children: [
+              buildNavItem('assets/images/bootm/home.png', 0),
+              Visibility( visible: isVisible,child: const MyText("Home"),),
+            ],
+          ),
+          Row(
+            children: [
+              SizedBox(
+                  height: 70,
+                  width: 55,
+                  child: buildNavItem('assets/images/bootm/person.png', 1)),
+              Visibility(visible: isVisible1, child: const MyText("Profile")),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget buildNavItem(String label, IconData iconData, int index) {
+  Widget buildNavItem(iconData, int index) {
     return InkWell(
       onTap: () => onItemTapped(index),
       child: SizedBox(
-        
         width: 60,
         height: 60,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              iconData,
-              color: index == selectedIndex ? Colors.white : Colors.grey,
-            ),
+            Image.asset(iconData),
             const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 10,
-                color: index == selectedIndex ? Colors.white : Colors.grey,
-              ),
-            ),
           ],
         ),
       ),

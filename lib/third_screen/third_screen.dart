@@ -35,7 +35,7 @@ class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double avatarRadius = screenHeight * 0.1;
+    final double avatarRadius = screenHeight * 0.07;
 
     return Scaffold(
       backgroundColor: MyColor.primaryBckg,
@@ -63,8 +63,8 @@ class ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     CircleAvatar(
-                      // child: Image.asset("assets/images/bootm/123.png"),
                       radius: avatarRadius,
+                      child: Image.asset("assets/images/bootm/123.png"),
                     ),
                     SizedBox(height: screenHeight * 0.01),
                     MyText(
